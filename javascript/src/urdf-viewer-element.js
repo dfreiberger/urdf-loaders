@@ -1,6 +1,8 @@
 import * as THREE from 'three';
+import URDFViewer from './urdf-viewer-element.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import URDFLoader from './URDFLoader.js';
+import XacroLoader from 'xacro-parser';
 
 const tempVec2 = new THREE.Vector2();
 
@@ -504,8 +506,21 @@ class URDFViewer extends HTMLElement {
             loader.packages = pkg;
             loader.loadMeshCb = this.loadMeshFunc;
             loader.fetchOptions = { mode: 'cors', credentials: 'same-origin' };
-            loader.load(urdf, model => robot = model);
 
+            if (/xacro$/.test(urdf)) {
+                const xacroLoader = new XacroLoader();
+                xacroLoader.load(urdf, 
+                    xml => {
+                        loader.workingPath = LoaderUtils.extractUrlBase( urdf );
+                        robot = loader.parse( xml );
+                    }, 
+                    err => { 
+                        console.log(err); 
+                    });
+            }
+            else {
+                loader.load(urdf, model => robot = model);
+            }
         }
 
     }
