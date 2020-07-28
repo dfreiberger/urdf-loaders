@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import URDFViewer from './urdf-viewer-element.js';
+import { LoaderUtils } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import URDFLoader from './URDFLoader.js';
 import XacroLoader from 'xacro-parser';
