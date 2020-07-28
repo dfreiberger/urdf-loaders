@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { LoaderUtils } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import URDFLoader from './URDFLoader.js';
-import XacroLoader from 'xacro-parser';
+import { XacroLoader } from 'xacro-parser';
 
 const tempVec2 = new THREE.Vector2();
 
